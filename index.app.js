@@ -9,6 +9,7 @@ import seeIconList from './features/see-icon-list.feat.js'
 import seeColorList from './features/see-color-list.feat.js'
 import createSpritesheet from './data/spritesheet.js'
 import seeStrokeWidthList from './features/see-stroke-width-list.feat.js'
+import selectIcons from './features/select-icons.feat.js'
 import undoAndRedo from './features/undo-and-redo.feat.js'
 import * as bus from './services/bus.service.js'
 import views from './services/views.service.js'
@@ -24,6 +25,7 @@ undoAndRedo(context)
 
 addIcons(context)
 seeIconList(context)
+selectIcons(context)
 
 seeColorList(context)
 deleteColor(context)
