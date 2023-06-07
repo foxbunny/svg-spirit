@@ -17,6 +17,7 @@ function updateSpritesheet() {
     let id = 'sprite-' + name
     let $icon = context.views.getOrCreateById('sprite', id)
     $icon.querySelector('use').setAttribute('href', `${context.spritesheet.url}#${name}`)
+    $icon.querySelector('input').value = name
     $$icons.append($icon)
   })
   $spritesheet.replaceChildren($$icons)

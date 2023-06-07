@@ -4,6 +4,7 @@ export default function _SeeStyleList(context, options) {
 	let $list = document.getElementById(options.listSelector)
 
 	context.bus.on(Events.iconsAdded, updateList)
+	context.bus.on(Events.iconsDeleted, updateList)
 	context.bus.on(Events.resetState, updateList)
 	context.bus.on(options.deletionEvent, deleteListItem)
 	context.bus.on(options.editEvent, updateListItem)

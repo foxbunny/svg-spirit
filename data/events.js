@@ -4,11 +4,13 @@ let EVENTS = {
 	registerUndoableEvent: 'registerUndoableEvent',
 	spritesheetUpdated: 'spritesheetUpdated',
 	iconsAdded: 'iconsAdded',
+	iconsDeleted: 'iconsDeleted',
 	resetState: 'resetState',
 	colorDeleted: 'colorDeleted',
 	colorEdited: 'colorEdited',
 	strokeWidthDeleted: 'strokeWidthDeleted',
 	strokeWidthEdited: 'strokeWidthEdited',
+	selectionChanged: 'selectionChanged',
 }
 let MIN_EDIT_DISTANCE_FOR_SIMILARITY = 7 // derived by manually testing
 

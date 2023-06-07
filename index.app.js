@@ -1,6 +1,7 @@
 import createUndo from './data/undo.js'
 import addIcons from './features/add-icons.feat.js'
 import deleteColor from './features/delete-color.feat.js'
+import deleteIcons from './features/delete-icons.feat.js'
 import deleteStrokeWidth from './features/delete-stroke-width.feat.js'
 import downloadSpritesheet from './features/download-spritesheet.feat.js'
 import editColor from './features/edit-color.feat.js'
@@ -18,21 +19,21 @@ let context = {
 	bus: bus.create(),
 	views,
 	spritesheet: createSpritesheet(),
-	undo: createUndo()
-}
+	undo: createUndo(),
+};
 
-undoAndRedo(context)
-
-addIcons(context)
-seeIconList(context)
-selectIcons(context)
-
-seeColorList(context)
-deleteColor(context)
-editColor(context)
-
-seeStrokeWidthList(context)
-deleteStrokeWidth(context)
-editStrokeWidth(context)
-
-downloadSpritesheet(context)
+[
+	undoAndRedo,
+	addIcons,
+	seeIconList,
+	selectIcons,
+	deleteIcons,
+	seeColorList,
+	deleteColor,
+	editColor,
+	seeStrokeWidthList,
+	deleteStrokeWidth,
+	editStrokeWidth,
+	downloadSpritesheet,
+]
+	.forEach(feature => feature(context))
