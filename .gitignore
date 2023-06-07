@@ -1,0 +1,12 @@
+# Deps
+/node_modules
+
+# Build artifacts
+/.parcel-cache
+/dist
+*.log
+
+# IDE
+/.vscode
+/.idea
+*.iml

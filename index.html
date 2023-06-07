@@ -1,0 +1,111 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="SVG sprite generator - generate SVG sprites from your SVG icons made in Figma, Illustrator, Inkscape, and more.">
+
+<link rel="stylesheet" media="screen" href="index.screen.scss">
+
+<script type="module" src="index.app.js"></script>
+
+<title>SVG Spirit</title>
+</head>
+<body>
+<h1>SVG spirit</h1>
+
+<a id="sprite-url" download="icons.svg">Download sprite</a>
+
+<button id="undo">Undo</button>
+<button id="redo">Redo</button>
+
+<label id="add-icon">
+  <span>Add icons</span>
+  <input type="file" id="sprite-files" multiple accept="image/svg+xml">
+</label>
+
+<ul id="spritesheet"></ul>
+
+<ul id="colors"></ul>
+
+<ul id="stroke-widths"></ul>
+
+<dialog id="delete-color">
+  <h2>Delete or replace with another color</h2>
+
+  <form>
+    <input type="hidden" name="deleted">
+
+    <ul id="deleted-color-replacements"></ul>
+
+    <div>
+      <button type="button">Cancel</button>
+      <button>Delete</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="delete-stroke-width">
+  <h2>Delete or replace with another stroke width</h2>
+
+  <form>
+    <input type="hidden" name="deleted">
+
+    <ul id="deleted-stroke-width-replacements"></ul>
+
+    <div>
+      <button type="button">Cancel</button>
+      <button>Delete</button>
+    </div>
+  </form>
+</dialog>
+
+<template id="sprite">
+  <li class="sprite">
+    <svg><use/></svg>
+    <span></span>
+  </li>
+</template>
+
+<template id="color">
+  <li class="color">
+    <label>
+      <span>Color value</span>
+      <input type="color">
+    </label>
+    <span></span>
+    <button>Delete color</button>
+  </li>
+</template>
+
+<template id="stroke-width">
+  <li class="stroke-width">
+    <label>
+      <span>Stroke width</span>
+      <input type="text">
+    </label>
+    <button>Delete stroke width</button>
+  </li>
+</template>
+
+<template id="replacement-color">
+  <li class="replacement-color">
+    <label>
+      <input type="radio" name="replacement">
+      <span></span>
+    </label>
+  </li>
+</template>
+
+<template id="replacement-stroke-width">
+  <li class="replacement-stroke-width">
+    <label>
+      <input type="radio" name="replacement">
+      <span></span>
+    </label>
+  </li>
+</template>
+
+</body>
+</html>

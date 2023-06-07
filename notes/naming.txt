@@ -1,0 +1,44 @@
+CODE ORGANIZATION
+
+feature
+    = a functional unit in the application; files that implement features have
+      a .feature.js extension
+feature template
+    = a generic feature template that is invoked in features; files that
+      implement feature templates have a .template.js extension
+howto
+    = common application-wide tasks shared between two or more features; files
+      implementing howtos usually have a .howto.js extension; may be used by any
+      other module, including features and data
+service
+    = an abstraction over a browser API for repetitive tasks, reusable across
+      different apps; files that implement services have a .service.js
+      extension; the difference between services and howtos is that howtos
+      implement very specific solutions, while services are more generic
+data
+    = functions that create the initial state that will be shared across
+      features via the application context; files implementing these functions
+      do not have a special extension
+    = constants and similar information that is shared by other modules
+
+DOMAIN
+
+spritesheet
+    = collection of sprites
+icon
+    = individual icon image (a.k.a. sprite)
+color
+    = a color value used in the spritesheet
+    eg: '#aabb11', '#ab1'
+stroke width
+    = a stroke width used in the spritesheet
+    eg: 1px, 1.04px, 2%
+replacement (color / stroke width)
+    = a color or stroke width value that will replace the one being deleted
+alias
+    = a name given to a color / stroke width value
+    = the portion of the CSS custom property after the leading '--'
+    eg: like 'foo-bar'
+custom property
+    = same thing as CSS variable, alias with the leading '--'
+    eg: `--foo-bar`

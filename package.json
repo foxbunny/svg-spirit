@@ -1,0 +1,20 @@
+{
+  "name": "svg-spirit-pwa",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel index.html"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.9.1",
+    "parcel": "^2.9.1",
+    "parcel-plugin-nuke-dist": "^1.0.1"
+  },
+  "import": {
+    "#howto/*": "./howto/*.js"
+  }
+}

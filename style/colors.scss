@@ -1,0 +1,18 @@
+.replacement-color {
+	--color: transparent;
+
+	label > span {
+		display: inline-flex;
+		gap: 1em;
+		align-items: center;
+
+		&::before {
+			content: '';
+			display: block;
+			width: 1em;
+			height: 1em;
+			background: var(--color);
+			border: 1px solid var(--control-border-color);
+		}
+	}
+}
