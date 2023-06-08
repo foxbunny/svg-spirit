@@ -8,7 +8,7 @@ let context
 export default function editColor(appContext) {
   context = appContext
   $colors.addEventListener('change', ev => {
-		if (!ev.target.matches('input[type=color]')) return
+		if (!ev.target.matches('[name=value]')) return
 		let prevValue = ev.target.defaultValue
 		let newValue = ev.target.value
 		ev.target.defaultValue = newValue

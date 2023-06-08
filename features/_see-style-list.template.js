@@ -10,15 +10,19 @@ export default function _SeeStyleList(context, options) {
 	context.bus.on(options.editEvent, updateListItem)
 
 	function updateList() {
-		let colors = options.getAllValues(context.spritesheet)
+		let allValues = options.getAllValues(context.spritesheet)
+		let { aliases } = context.spritesheet
 		let $$ = document.createDocumentFragment()
-		colors
+		allValues
 			.filter(value => value != 'none')
 			.sort()
 			.forEach(value => {
 				let id = options.toId(value)
 				let $item = context.views.getOrCreateById(options.itemTemplate, id)
 				options.populateListItem($item, value)
+				let $aliasInput = $item.querySelector('[name=alias]')
+				$aliasInput.value = aliases[value] || ''
+				$aliasInput.dataset.value = value
 				$$.append($item)
 			})
 		$list.replaceChildren($$)

@@ -11,7 +11,7 @@ let DEBOUNCE_DELAY = 500
 export default function editStrokeWidth(appContext) {
 	context = appContext
 	$list.addEventListener('input', ev => {
-		if (!ev.target.matches('input[type=text]')) return
+		if (!ev.target.matches('[name=value]')) return
 		clearTimeout(ev.target[debounce])
 		ev.target[debounce] = setTimeout(() => {
 			let prevValue = ev.target.defaultValue

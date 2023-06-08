@@ -28,7 +28,11 @@
   <input type="file" id="sprite-files" multiple accept="image/svg+xml">
 </label>
 
-<ul id="spritesheet"></ul>
+<fieldset>
+  <legend>Spritesheet icons</legend>
+
+  <ul id="spritesheet"></ul>
+</fieldset>
 
 <ul id="colors"></ul>
 
@@ -78,9 +82,13 @@
   <li class="color">
     <label>
       <span>Color value</span>
-      <input type="color">
+      <input type="color" name="value">
     </label>
     <span></span>
+    <label>
+      <span>Alias</span>
+      <input type="text" name="alias" placeholder="no alias provided" pattern="[\w-]+">
+    </label>
     <button>Delete color</button>
   </li>
 </template>
@@ -89,9 +97,13 @@
   <li class="stroke-width">
     <label>
       <span>Stroke width</span>
-      <input type="text">
+      <input name="value" type="text">
     </label>
     <button>Delete stroke width</button>
+    <label>
+      <span>Alias</span>
+      <input type="text" name="alias" placeholder="no alias provided" pattern="[\w-]+">
+    </label>
   </li>
 </template>
 

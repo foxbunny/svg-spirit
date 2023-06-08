@@ -1,5 +1,6 @@
 import createUndo from './data/undo.js'
 import addIcons from './features/add-icons.feat.js'
+import aliasStyle from './features/alias-style.feat.js'
 import deleteColor from './features/delete-color.feat.js'
 import deleteIcons from './features/delete-icons.feat.js'
 import deleteStrokeWidth from './features/delete-stroke-width.feat.js'
@@ -23,17 +24,18 @@ let context = {
 };
 
 [
-	undoAndRedo,
 	addIcons,
-	seeIconList,
-	selectIcons,
-	deleteIcons,
-	seeColorList,
+	aliasStyle,
 	deleteColor,
-	editColor,
-	seeStrokeWidthList,
+	deleteIcons,
 	deleteStrokeWidth,
-	editStrokeWidth,
 	downloadSpritesheet,
+	editColor,
+	editStrokeWidth,
+	seeColorList,
+	seeIconList,
+	seeStrokeWidthList,
+	selectIcons,
+	undoAndRedo,
 ]
 	.forEach(feature => feature(context))

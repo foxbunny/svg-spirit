@@ -16,9 +16,16 @@ function updateSpritesheet() {
   iconNames.forEach(name => {
     let id = 'sprite-' + name
     let $icon = context.views.getOrCreateById('sprite', id)
+    setCustomVariables($icon.querySelector('svg'), context.spritesheet.aliases)
     $icon.querySelector('use').setAttribute('href', `${context.spritesheet.url}#${name}`)
     $icon.querySelector('input').value = name
+    $icon.querySelector('span').textContent = name
     $$icons.append($icon)
   })
   $spritesheet.replaceChildren($$icons)
+}
+
+function setCustomVariables($svg, aliases) {
+  Object.entries(aliases)
+    .forEach(([value, alias]) => $svg.style.setProperty(`--${alias}`, value))
 }
