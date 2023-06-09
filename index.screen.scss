@@ -2,11 +2,18 @@
 @use "style/variables";
 @use "style/colors";
 
+%visually-hidden {
+	position: absolute;
+	right: 100vw;
+	opacity: 0;
+}
+
 .icon {
 	--icon-primary: currentColor;
 	--icon-stroke: 1px;
-	width: 1.5em;
-	height: 1.5em;
+	--icon-size: 1.5em;
+	width: var(--icon-size);
+	height: var(--icon-size);
 }
 
 :focus-visible {
@@ -14,23 +21,90 @@
 	outline: 2px solid var(--active-border);
 }
 
+body {
+	height: 100vh;
+	overflow: hidden;
+}
+
+#content {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: stretch;
+	height: 100vh;
+	overflow-y: auto;
+
+	scroll-snap-type: y mandatory;
+	scroll-behavior: smooth;
+}
+
+.panel {
+	display: flex;
+	flex-direction: column;
+	padding: 1em;
+	height: 100vh;
+	scroll-snap-align: start;
+
+	h2 {
+		@extend %visually-hidden;
+	}
+}
+
+main {
+	flex: 10000 0;
+	min-width: min(100%, 40em);
+	gap: 4vw;
+}
+
+section.panel {
+	flex: 1;
+	gap: 1em;
+	min-width: min(100%, 30em);
+	flex-shrink: 0;
+
+	background: var(--secondary-alt)
+}
+
+header {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 2em;
+}
+
+h1 {
+	background-image: url('img/logo-light.svg');
+	background-repeat: no-repeat;
+	overflow: hidden;
+	width: 10em;
+	height: 1.9em;
+	text-indent: -1000vw;
+	margin-top: 0.5em;
+
+	[data-mode=dark] & {
+		background-image: url('img/logo-dark.svg');
+	}
+}
+
 #toolbar {
 	display: flex;
 	align-items: stretch;
+	flex-wrap: wrap;
 	gap: 0.5em;
+	flex: none;
+	max-width: 100%;
 
 	.icon {
-		width: 2.5em;
-		height: 2.5em;
+		--icon-size: 2em;
 	}
 
 	button, a, label {
-		color: var(--active);
+		color: var(--primary);
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		width: 6em;
 		padding: 0.2em;
+		flex: none;
 
 		border: none;
 		background: transparent;
@@ -51,14 +125,112 @@
 	}
 
 	input[type=file] {
-		position: absolute;
-		right: 100vw;
-		width: 0;
-		height: 0;
-		opacity: 0;
+		@extend %visually-hidden;
 	}
 }
 
 [data-mode=dark] #dark-light use:last-child {
 	opacity: 0;
+}
+
+#spritesheet-editor {
+	flex: 1;
+	overflow-y: auto;
+
+	legend {
+		@extend %visually-hidden;
+	}
+}
+
+#spritesheet-tools {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5em;
+
+	button {
+		color: var(--primary);
+		display: flex;
+		align-items: center;
+		padding: 0.2em;
+		gap: 0.2em;
+		flex: none;
+
+		border: none;
+		background: transparent;
+		font-size: var(--min-font-size);
+	}
+}
+
+#spritesheet {
+	display: flex;
+	gap: 1em;
+	flex-wrap: wrap;
+}
+
+.sprite {
+	--sprite-border-width: 1px;
+
+	label {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		gap: 0.4em;
+		padding: 1em;
+		width: 7em;
+		position: relative;
+
+		border: var(--sprite-border-width) solid var(--control-border-color);
+		border-radius: 0.2em;
+		text-align: center;
+	}
+
+	input[type=checkbox] {
+		@extend %visually-hidden;
+	}
+
+	input:checked + label {
+		border-color: var(--selected-border);
+		background: var(--selected-bg);
+	}
+
+	input:focus-visible + label {
+		outline: 2px solid var(--active-border);
+	}
+
+	label > span {
+		white-space: nowrap;
+		overflow: hidden;
+		max-width: 6em;
+		padding: 0.2em 0.5em;
+
+		text-overflow: ellipsis;
+		border: 1px solid transparent;
+		border-radius: 0.2em;
+		transition: background-color 0.3s;
+
+		&:hover {
+			max-width: none;
+
+			background: var(--secondary-alt);
+			border-color: var(--primary);
+			z-index: 1;
+		}
+	}
+
+	svg {
+		--bg-dark: #ddd;
+		background-color: white;
+		background-image: linear-gradient(45deg, var(--bg-dark) 25%, transparent 25%), linear-gradient(-45deg, var(--bg-dark) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, var(--bg-dark) 75%), linear-gradient(-45deg, transparent 75%, var(--bg-dark) 75%);
+		background-size: 1em 1em;
+		background-position: 0 0, 0 10px, 0.5em -0.5em, -0.5em 0px;
+
+		width: 4em;
+		height: 4em;
+	}
+}
+
+.color {
+	label > span {
+		@extend %visually-hidden;
+	}
 }

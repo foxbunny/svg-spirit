@@ -15,10 +15,15 @@ function updateSpritesheet() {
   let $$icons = document.createDocumentFragment()
   iconNames.forEach(name => {
     let id = 'sprite-' + name
+    let inputId = 'select-' + name
     let $icon = context.views.getOrCreateById('sprite', id)
     setCustomVariables($icon.querySelector('svg'), context.spritesheet.aliases)
     $icon.querySelector('use').setAttribute('href', `${context.spritesheet.url}#${name}`)
-    $icon.querySelector('input').value = name
+    Object.assign($icon.querySelector('input'), {
+      value: name,
+      id: inputId,
+    })
+    $icon.querySelector('label').htmlFor = inputId
     $icon.querySelector('span').textContent = name
     $$icons.append($icon)
   })

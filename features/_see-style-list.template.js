@@ -2,6 +2,7 @@ import Events from '../data/events.js'
 
 export default function _SeeStyleList(context, options) {
 	let $list = document.getElementById(options.listSelector)
+	let $section = $list.closest('section')
 
 	context.bus.on(Events.iconsAdded, updateList)
 	context.bus.on(Events.iconsDeleted, updateList)
@@ -11,6 +12,7 @@ export default function _SeeStyleList(context, options) {
 
 	function updateList() {
 		let allValues = options.getAllValues(context.spritesheet)
+		$section.hidden = !allValues.length
 		let { aliases } = context.spritesheet
 		let $$ = document.createDocumentFragment()
 		allValues

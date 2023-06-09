@@ -4,7 +4,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="SVG sprite generator - generate SVG sprites from your SVG icons made in Figma, Illustrator, Inkscape, and more.">
+<meta name="description"
+      content="SVG sprite generator - generate SVG sprites from your SVG icons made in Figma, Illustrator, Inkscape, and more.">
 
 <link rel="stylesheet" media="screen" href="index.screen.scss">
 
@@ -13,64 +14,93 @@
 <title>SVG Spirit</title>
 </head>
 <body>
-<h1>SVG spirit</h1>
+<div id="content">
+  <main class="panel">
+    <header>
+      <h1>SVG spirit</h1>
 
-<div id="toolbar">
-  <label id="add-icon">
-    <svg class="icon" aria-hidden="true"><use href="img/icons.svg#add"/></svg>
-    <span>Add icons</span>
-    <input type="file" id="sprite-files" multiple accept="image/svg+xml">
-  </label>
-  <a id="sprite-url" download="icons.svg">
-    <svg class="icon" aria-hidden="true"><use href="img/icons.svg#download"/></svg>
-    <span>Download spritesheet</span>
-  </a>
-  <button id="undo">
-    <svg class="icon" aria-hidden="true"><use href="img/icons.svg#undo"/></svg>
-    <span>Undo</span>
-  </button>
-  <button id="redo">
-    <svg class="icon" aria-hidden="true"><use href="img/icons.svg#redo"/></svg>
-    <span>Redo</span>
-  </button>
-  <button id="select-all">
-    <svg class="icon" aria-hidden="true">
-      <use href="img/icons.svg#selection"/>
-      <use href="img/icons.svg#selection-tick"/>
-    </svg>
-    <span>Select all</span>
-  </button>
-  <button id="deselect-all">
-    <svg class="icon" aria-hidden="true"><use href="img/icons.svg#selection"/></svg>
-    <span>Deselect all</span>
-  </button>
-  <button id="delete-selection">
-    <svg class="icon" aria-hidden="true"><use href="img/icons.svg#delete"/></svg>
-    <span>Delete selected icons</span>
-  </button>
-  <button id="dark-light">
-    <svg class="icon" aria-hidden="true">
-      <use href="img/icons.svg#light-bulb"/>
-      <use href="img/icons.svg#rays"/>
-    </svg>
-    <span>Dark mode</span>
-  </button>
+      <section id="toolbar">
+        <h2>Toolbar</h2>
+        <label id="add-icon">
+          <svg class="icon" aria-hidden="true">
+            <use href="img/icons.svg#add"/>
+          </svg>
+          <span>Add icons</span>
+          <input type="file" id="sprite-files" multiple accept="image/svg+xml">
+        </label>
+        <a id="sprite-url" download="icons.svg">
+          <svg class="icon" aria-hidden="true">
+            <use href="img/icons.svg#download"/>
+          </svg>
+          <span>Get SVG</span>
+        </a>
+        <button id="undo">
+          <svg class="icon" aria-hidden="true">
+            <use href="img/icons.svg#undo"/>
+          </svg>
+          <span>Undo</span>
+        </button>
+        <button id="redo">
+          <svg class="icon" aria-hidden="true">
+            <use href="img/icons.svg#redo"/>
+          </svg>
+          <span>Redo</span>
+        </button>
+        <button id="dark-light">
+          <svg class="icon" aria-hidden="true">
+            <use href="img/icons.svg#light-bulb"/>
+            <use href="img/icons.svg#rays"/>
+          </svg>
+          <span>Dark mode</span>
+        </button>
+      </section>
+    </header>
+
+    <fieldset id="spritesheet-editor">
+      <legend>Spritesheet icons</legend>
+
+      <div id="spritesheet-tools">
+        <button id="select-all">
+          <svg class="icon" aria-hidden="true">
+            <use href="img/icons.svg#selection"/>
+            <use href="img/icons.svg#selection-tick"/>
+          </svg>
+          <span>Select all</span>
+        </button>
+        <button id="deselect-all">
+          <svg class="icon" aria-hidden="true">
+            <use href="img/icons.svg#selection"/>
+          </svg>
+          <span>Deselect all</span>
+        </button>
+        <button id="delete-selection">
+          <svg class="icon" aria-hidden="true">
+            <use href="img/icons.svg#delete"/>
+          </svg>
+          <span>Delete</span>
+        </button>
+      </div>
+
+      <ul id="spritesheet">
+        <li></li>
+      </ul>
+    </fieldset>
+  </main>
+
+  <section class="panel" aria-labelledby="sprite-settings-heading">
+    <h2 id="sprite-settings-heading">Sprite settings</h2>
+
+    <section class="settings-panel" aria-labelledby="sprite-colors-heading" hidden>
+      <h3 id="sprite-colors-heading">Colors</h3>
+      <ul id="colors"></ul>
+    </section>
+
+    <section class="settings-panel" aria-labelledby="sprite-stroke-width-heading" hidden>
+      <h3 id="sprite-stroke-width-heading">Stroke width</h3>
+      <ul id="stroke-widths"></ul>
+    </section>
+  </section>
 </div>
-
-<fieldset>
-  <legend>Spritesheet icons</legend>
-
-  <ul id="spritesheet">
-
-    <li>
-
-    </li>
-  </ul>
-</fieldset>
-
-<ul id="colors"></ul>
-
-<ul id="stroke-widths"></ul>
 
 <dialog id="delete-color">
   <h2>Delete or replace with another color</h2>
@@ -104,8 +134,8 @@
 
 <template id="sprite">
   <li class="sprite">
+    <input type="checkbox" name="selection">
     <label>
-      <input type="checkbox" name="selection">
       <svg><use/></svg>
       <span></span>
     </label>
