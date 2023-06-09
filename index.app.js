@@ -12,6 +12,7 @@ import seeColorList from './features/see-color-list.feat.js'
 import createSpritesheet from './data/spritesheet.js'
 import seeStrokeWidthList from './features/see-stroke-width-list.feat.js'
 import selectIcons from './features/select-icons.feat.js'
+import toggleDarkLightMode from './features/toggle-dark-light-mode.feat.js'
 import undoAndRedo from './features/undo-and-redo.feat.js'
 import * as bus from './services/bus.service.js'
 import views from './services/views.service.js'
@@ -36,6 +37,7 @@ let context = {
 	seeIconList,
 	seeStrokeWidthList,
 	selectIcons,
+	toggleDarkLightMode,
 	undoAndRedo,
 ]
 	.forEach(feature => feature(context))

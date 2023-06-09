@@ -1,3 +1,20 @@
 body {
+	--primary: #333;
+	--secondary: #efefef;
+	--disabled-fg: #999;
+	--active: #035339;
+	--active-border: #068856;
 	--control-border-color: #777;
+
+	--min-font-size: max(12px, 0.875em);
+
+	color: var(--primary);
+	background: var(--secondary);
+}
+
+body[data-mode=dark] {
+	--primary: #efefef;
+	--secondary: #333;
+	--disabled-fg: #777;
+	--active: #07ba80;
 }

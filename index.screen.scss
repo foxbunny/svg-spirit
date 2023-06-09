@@ -1,3 +1,64 @@
 @use "style/reset";
 @use "style/variables";
 @use "style/colors";
+
+.icon {
+	--icon-primary: currentColor;
+	--icon-stroke: 1px;
+	width: 1.5em;
+	height: 1.5em;
+}
+
+:focus-visible {
+	outline: thick var(--active-border);
+	outline: 2px solid var(--active-border);
+}
+
+#toolbar {
+	display: flex;
+	align-items: stretch;
+	gap: 0.5em;
+
+	.icon {
+		width: 2.5em;
+		height: 2.5em;
+	}
+
+	button, a, label {
+		color: var(--active);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 6em;
+		padding: 0.2em;
+
+		border: none;
+		background: transparent;
+		text-align: center;
+		font-size: var(--min-font-size);
+	}
+
+	button:disabled, a:not([href]) {
+		color: var(--disabled-fg);
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	label:focus-within {
+		@extend :focus-visible;
+	}
+
+	input[type=file] {
+		position: absolute;
+		right: 100vw;
+		width: 0;
+		height: 0;
+		opacity: 0;
+	}
+}
+
+[data-mode=dark] #dark-light use:last-child {
+	opacity: 0;
+}

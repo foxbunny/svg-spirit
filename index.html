@@ -15,23 +15,57 @@
 <body>
 <h1>SVG spirit</h1>
 
-<a id="sprite-url" download="icons.svg">Download sprite</a>
-
-<button id="undo">Undo</button>
-<button id="redo">Redo</button>
-<button id="select-all">Select all</button>
-<button id="deselect-all">Deselect all</button>
-<button id="delete-selection">Delete selected icons</button>
-
-<label id="add-icon">
-  <span>Add icons</span>
-  <input type="file" id="sprite-files" multiple accept="image/svg+xml">
-</label>
+<div id="toolbar">
+  <label id="add-icon">
+    <svg class="icon" aria-hidden="true"><use href="img/icons.svg#add"/></svg>
+    <span>Add icons</span>
+    <input type="file" id="sprite-files" multiple accept="image/svg+xml">
+  </label>
+  <a id="sprite-url" download="icons.svg">
+    <svg class="icon" aria-hidden="true"><use href="img/icons.svg#download"/></svg>
+    <span>Download spritesheet</span>
+  </a>
+  <button id="undo">
+    <svg class="icon" aria-hidden="true"><use href="img/icons.svg#undo"/></svg>
+    <span>Undo</span>
+  </button>
+  <button id="redo">
+    <svg class="icon" aria-hidden="true"><use href="img/icons.svg#redo"/></svg>
+    <span>Redo</span>
+  </button>
+  <button id="select-all">
+    <svg class="icon" aria-hidden="true">
+      <use href="img/icons.svg#selection"/>
+      <use href="img/icons.svg#selection-tick"/>
+    </svg>
+    <span>Select all</span>
+  </button>
+  <button id="deselect-all">
+    <svg class="icon" aria-hidden="true"><use href="img/icons.svg#selection"/></svg>
+    <span>Deselect all</span>
+  </button>
+  <button id="delete-selection">
+    <svg class="icon" aria-hidden="true"><use href="img/icons.svg#delete"/></svg>
+    <span>Delete selected icons</span>
+  </button>
+  <button id="dark-light">
+    <svg class="icon" aria-hidden="true">
+      <use href="img/icons.svg#light-bulb"/>
+      <use href="img/icons.svg#rays"/>
+    </svg>
+    <span>Dark mode</span>
+  </button>
+</div>
 
 <fieldset>
   <legend>Spritesheet icons</legend>
 
-  <ul id="spritesheet"></ul>
+  <ul id="spritesheet">
+
+    <li>
+
+    </li>
+  </ul>
 </fieldset>
 
 <ul id="colors"></ul>
