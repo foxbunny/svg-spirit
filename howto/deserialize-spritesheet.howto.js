@@ -8,6 +8,7 @@ export default function deserializeSpritesheet(data) {
 				},
 			),
 		),
+		alases: data.aliases,
 		svg: null,
 		url: '',
 	}

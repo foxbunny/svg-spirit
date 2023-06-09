@@ -1,6 +1,8 @@
 export default function serializeSpritesheet(spritesheet) {
+	let serializer = new XMLSerializer()
 	return {
 		icons: Object.values(spritesheet.icons)
-			.map($symbol => $symbol.outerHTML)
+			.map($symbol => serializer.serializeToString($symbol)),
+		aliases: spritesheet.aliases,
 	}
 }
