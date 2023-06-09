@@ -2,11 +2,12 @@ class ParseError extends Error {}
 
 let RGB_RE = /rgb\((\d{1,3}), (\d{1,3}), (\d{1,3})\)/
 
-export default function extractSymbolFromSvg(svgSource, options = {}) {
+export default function extractSymbolFromSvg(svgSource) {
 	let $svgDocument = new DOMParser().parseFromString(svgSource, 'image/svg+xml')
 	if (isNotExtracted($svgDocument)) throw new ParseError()
 	try {
-		if (isSingleGroupSVG($svgDocument)) return extractSingleGroupSVG($svgDocument, options)
+		if (isAffinitySvg($svgDocument)) return extractAffinitySVG($svgDocument)
+		if (isSingleGroupSVG($svgDocument)) return extractSingleGroupSVG($svgDocument)
 		else return extractGenericSVG($svgDocument, options)
 	} catch (e) {
 		console.error(`Error ${e} in ${svgSource}`, e)
@@ -18,9 +19,23 @@ function isNotExtracted($svgDocument) {
 	return $svgDocument.querySelector('svg') == null
 }
 
+function isAffinitySvg($svgDocument) {
+	return $svgDocument.querySelector('svg').hasAttribute('xmlns:serif')
+}
+
 function isSingleGroupSVG($svgDocument) {
 	let $svg = $svgDocument.querySelector('svg')
 	return $svg.children.length == 1 && $svg.children[0].matches('g')
+}
+
+function extractAffinitySVG($svgDocument) {
+	let $svg = $svgDocument.querySelector('svg')
+	$svg.querySelectorAll('*')
+		.forEach($el => {
+			$el.removeAttribute('xmlns:serif')
+			$el.removeAttribute('serif:id')
+		})
+	return extractSingleGroupSVG($svgDocument)
 }
 
 function extractSingleGroupSVG($svgDocument) {
