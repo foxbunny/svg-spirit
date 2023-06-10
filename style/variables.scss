@@ -1,4 +1,23 @@
+@property --primary {
+	syntax: '<color>';
+	inherits: true;
+	initial-value: transparent;
+}
+
+@property --secondary {
+	syntax: '<color>';
+	inherits: true;
+	initial-value: transparent;
+}
+
+@property --secondary-alt {
+	syntax: '<color>';
+	inherits: true;
+	initial-value: transparent;
+}
+
 body {
+	--dark-mode-transition: 0.4s;
 	--primary: #333;
 	--secondary: #efefef;
 	--secondary-alt: #d8d8d8;
@@ -8,11 +27,16 @@ body {
 	--selected-border: #a5840d;
 	--selected-bg: #f4f4db;
 	--control-border-color: #777;
+	--tooltip-bg: #e7b60b;
+	--tooltip-fg: #333;
 
 	--min-font-size: max(12px, 0.875em);
 
 	color: var(--primary);
 	background: var(--secondary);
+
+	transition-duration: var(--dark-mode-transition);
+	transition-property: --primary, --secondary, --secondary-alt;
 }
 
 body[data-mode=dark] {

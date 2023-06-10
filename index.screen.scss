@@ -8,6 +8,103 @@
 	opacity: 0;
 }
 
+%has-tooltip {
+	position: relative;
+
+	> [role=tooltip] {
+		position: absolute;
+		padding: 0.5em;
+		z-index: 1;
+
+		background: var(--tooltip-bg);
+		color: var(--tooltip-fg);
+		border: 1px solid var(--tooltip-fg);
+		border-radius: 0.2em;
+		font-size: var(--small-text);
+		white-space: nowrap;
+		transition: opacity 0s 1s;
+	}
+
+	&:not(:focus-visible, :focus-within, :hover) > [role=tooltip] {
+		position: absolute;
+		opacity: 0;
+		pointer-events: none;
+		transition-delay: 0s;
+	}
+}
+
+%tooltip-above {
+	> [role=tooltip] {
+		bottom: 100%;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+}
+
+%tooltip-left {
+	> [role=tooltip] {
+		top: 50%;
+		right: 100%;
+		transform: translateY(-50%);
+	}
+}
+
+%tooltip-right {
+	> [role=tooltip] {
+		top: 50%;
+		left: 100%;
+		transform: translateY(-50%);
+	}
+}
+
+%tooltip-bottom {
+	> [role=tooltip] {
+		left: 50%;
+		top: 100%;
+		transform: translateX(-50%);
+	}
+}
+
+%tooltip-bottom-right {
+	> [role=tooltip] {
+		right: 0;
+		top: 100%;
+	}
+}
+
+%toolbox {
+	button, a, label {
+		color: var(--primary);
+		display: flex;
+		flex-direction: column;
+		gap: 0.5em;
+		align-items: center;
+		padding: 0.2em;
+		flex: none;
+
+		border: none;
+		border-radius: 0.2em;
+		background: transparent;
+		text-align: center;
+	}
+
+	button:disabled, a:not([href]) {
+		color: var(--disabled-fg);
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	label:focus-within {
+		@extend :focus-visible;
+	}
+
+	input[type=file] {
+		@extend %visually-hidden;
+	}
+}
+
 .icon {
 	--icon-primary: currentColor;
 	--icon-stroke: 1px;
@@ -40,7 +137,6 @@ body {
 .panel {
 	display: flex;
 	flex-direction: column;
-	padding: 1em;
 	height: 100vh;
 	scroll-snap-align: start;
 
@@ -52,12 +148,12 @@ body {
 main {
 	flex: 10000 0;
 	min-width: min(100%, 40em);
-	gap: 4vw;
 }
 
 section.panel {
 	flex: 1;
 	gap: 1em;
+	padding: 1em;
 	min-width: min(100%, 30em);
 	flex-shrink: 0;
 
@@ -69,6 +165,7 @@ header {
 	flex-wrap: wrap;
 	justify-content: space-between;
 	gap: 2em;
+	padding: 1em;
 }
 
 h1 {
@@ -86,6 +183,7 @@ h1 {
 }
 
 #toolbar {
+	@extend %toolbox;
 	display: flex;
 	align-items: stretch;
 	flex-wrap: wrap;
@@ -98,36 +196,13 @@ h1 {
 	}
 
 	button, a, label {
-		color: var(--primary);
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		width: 6em;
-		padding: 0.2em;
-		flex: none;
-
-		border: none;
-		border-radius: 0.2em;
-		background: transparent;
-		text-align: center;
-		font-size: var(--min-font-size);
+		@extend %has-tooltip;
+		@extend %tooltip-bottom;
 	}
+}
 
-	button:disabled, a:not([href]) {
-		color: var(--disabled-fg);
-	}
-
-	a {
-		text-decoration: none;
-	}
-
-	label:focus-within {
-		@extend :focus-visible;
-	}
-
-	input[type=file] {
-		@extend %visually-hidden;
-	}
+#dark-light use:last-child {
+	transition: opacity var(--dark-mode-transition) 0.4s;
 }
 
 [data-mode=dark] #dark-light use:last-child {
@@ -135,53 +210,96 @@ h1 {
 }
 
 #spritesheet-editor {
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
 	flex: 1;
-	overflow-y: auto;
-	padding: 2px;
+	overflow: hidden;
 
 	legend {
 		@extend %visually-hidden;
 	}
 }
 
+#spritesheet-editor-main {
+	display: flex;
+	gap: 1em;
+}
+
 #spritesheet-tools {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5em;
+	justify-content: flex-start;
+	flex: none;
+
+	button, a, label {
+		@extend %tooltip-right;
+	}
+}
+
+#spritesheet-tools-secondary {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 0.5em;
+	justify-content: flex-end;
 
-	button {
-		color: var(--primary);
-		display: flex;
-		align-items: center;
-		padding: 0.2em 0.5em;
-		gap: 0.2em;
-		flex: none;
+	button, a, label {
+		@extend %tooltip-bottom;
+	}
+}
 
-		border: none;
-		border-radius: 0.2em;
-		background: transparent;
-		font-size: var(--min-font-size);
+#spritesheet-tools,
+#spritesheet-tools-secondary {
+	@extend %toolbox;
+	padding: 2px 1em;
+	gap: 1em;
+
+	.icon {
+		--icon-size: 2em;
 	}
 
-	button:disabled {
-		color: var(--disabled-fg);
+	button, a, label {
+		@extend %has-tooltip;
 	}
 }
 
 #spritesheet {
+	overflow-y: auto;
+	max-height: 100%;
 	display: flex;
 	gap: 1em;
-	flex-wrap: wrap;
+	flex: 1;
+	padding: 0 1em 1em;
+
+	scroll-snap-type: y mandatory;
+
+	&[data-layout=tiles] {
+		flex-wrap: wrap;
+	}
+
+	&[data-layout=list] {
+		flex-direction: column;
+	}
 }
 
 .sprite {
+	--transition-duration: var(--dark-mode-transition);
 	--sprite-border-width: 1px;
+	padding: 2px;
+
+	scroll-snap-align: start;
+	transition: all var(--transition-duration);
 
 	label {
 		display: flex;
 		align-items: center;
+		gap: 1em;
+		transition: all var(--transition-duration);
+	}
+
+	[data-layout=tiles] & label {
 		flex-direction: column;
-		gap: 0.4em;
 		padding: 1em;
 		width: 7em;
 		position: relative;
@@ -189,6 +307,11 @@ h1 {
 		border: var(--sprite-border-width) solid var(--control-border-color);
 		border-radius: 0.2em;
 		text-align: center;
+		background-color: var(--secondary-alt);
+	}
+
+	[data-layout=list] & label {
+		display: flex;
 	}
 
 	input[type=checkbox] {
@@ -204,24 +327,25 @@ h1 {
 		outline: 2px solid var(--active-border);
 	}
 
-	label > span {
+	[data-layout=tiles] & label > span {
 		white-space: nowrap;
 		overflow: hidden;
-		max-width: 6em;
+		max-width: 8em;
 		padding: 0.2em 0.5em;
 
 		text-overflow: ellipsis;
 		border: 1px solid transparent;
 		border-radius: 0.2em;
-		transition: background-color 0.3s;
+		transition: background-color 0.3s, border-color 0.3s;
+		font-size: var(--min-font-size);
+	}
 
-		&:hover {
-			max-width: none;
+	[data-layout=tiles] &:hover > label > span {
+		max-width: none;
 
-			background: var(--secondary-alt);
-			border-color: var(--primary);
-			z-index: 1;
-		}
+		background: var(--secondary-alt);
+		border-color: var(--primary);
+		z-index: 1;
 	}
 
 	svg {
@@ -230,9 +354,16 @@ h1 {
 		background-image: linear-gradient(45deg, var(--bg-dark) 25%, transparent 25%), linear-gradient(-45deg, var(--bg-dark) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, var(--bg-dark) 75%), linear-gradient(-45deg, transparent 75%, var(--bg-dark) 75%);
 		background-size: 1em 1em;
 		background-position: 0 0, 0 10px, 0.5em -0.5em, -0.5em 0px;
+	}
 
+	[data-layout=tiles] & svg {
 		width: 4em;
 		height: 4em;
+	}
+
+	[data-layout=list] & svg {
+		width: 2em;
+		height: 2em;
 	}
 }
 
