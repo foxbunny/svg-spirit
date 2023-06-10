@@ -16,6 +16,24 @@
 	initial-value: transparent;
 }
 
+@property --active {
+	syntax: '<color>';
+	inherits: true;
+	initial-value: transparent;
+}
+
+@property --selected-border {
+	syntax: '<color>';
+	inherits: true;
+	initial-value: transparent;
+}
+
+@property --selected-bg {
+	syntax: '<color>';
+	inherits: true;
+	initial-value: transparent;
+}
+
 body {
 	--dark-mode-transition: 0.4s;
 	--primary: #333;
@@ -36,7 +54,13 @@ body {
 	background: var(--secondary);
 
 	transition-duration: var(--dark-mode-transition);
-	transition-property: --primary, --secondary, --secondary-alt;
+	transition-property:
+		--primary,
+		--secondary,
+		--secondary-alt,
+		--active,
+		--selected-border,
+		--selected-bg;
 }
 
 body[data-mode=dark] {
