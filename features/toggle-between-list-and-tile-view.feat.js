@@ -22,7 +22,7 @@ function toggleTileMode() {
 }
 
 function updateDisplayMode() {
-	let mode = localStorage.displayMode || 'list'
+	let mode = localStorage.displayMode || $list.dataset.layout
 	$listModeToggle.disabled = mode == 'list'
 	$tileModeToggle.disabled = mode == 'tiles'
 	$list.dataset.layout = mode
