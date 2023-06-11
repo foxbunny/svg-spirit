@@ -41,8 +41,10 @@ npm run dev
 To compile the production build:
 
 ```shell
-npm run build
+npm run dist
 ```
+
+The output is placed in the `dist` folder.
 
 ## Architecture notes
 
