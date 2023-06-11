@@ -24,7 +24,7 @@
 		transition: opacity 0s 1s;
 	}
 
-	&:not(:focus-visible, :focus-within, :hover) > [role=tooltip] {
+	&:not(:focus):not(:focus-within):not(:hover) > [role=tooltip] {
 		position: absolute;
 		opacity: 0;
 		pointer-events: none;
@@ -96,7 +96,7 @@
 	}
 
 	label:focus-within {
-		@extend :focus-visible;
+		@extend :focus;
 	}
 
 	input[type=file] {
@@ -130,7 +130,7 @@
 	fill: none;
 }
 
-:focus-visible {
+:focus {
 	outline: thick var(--active-border);
 	outline: 2px solid var(--active-border);
 }
@@ -265,9 +265,13 @@ h1 {
 		@extend %has-tooltip;
 		@extend %tooltip-bottom;
 
-		&:hover:not(:disabled, a:not([href])) {
-			@extend :focus-visible;
+		&:hover:not(:disabled) {
+			@extend :focus;
 		}
+	}
+
+	a[href]:hover {
+		@extend :focus;
 	}
 }
 
@@ -328,7 +332,7 @@ button#settings {
 		@extend %tooltip-right;
 
 		&:hover:not(:disabled) {
-			@extend :focus-visible;
+			@extend :focus;
 		}
 	}
 }
@@ -357,9 +361,13 @@ button#settings {
 	button, a, label {
 		@extend %has-tooltip;
 
-		&:hover:not(:disabled, a:not([hover])) {
-			@extend :focus-visible;
+		&:hover:not(:disabled) {
+			@extend :focus;
 		}
+	}
+
+	a[href]:hover {
+		@extend :focus;
 	}
 }
 
@@ -429,7 +437,7 @@ button#settings {
 		background: var(--selected-bg);
 	}
 
-	input:focus-visible + label {
+	input:focus + label {
 		outline: 2px solid var(--active-border);
 	}
 
@@ -519,7 +527,7 @@ button#settings {
 		border-radius: 0.2em;
 
 		&:hover {
-			@extend :focus-visible;
+			@extend :focus;
 		}
 	}
 
@@ -548,7 +556,7 @@ button#settings {
 		background-color: var(--secondary);
 
 		&:hover {
-			@extend :focus-visible;
+			@extend :focus;
 		}
 	}
 
@@ -605,7 +613,7 @@ dialog {
 		@extend %plain-button;
 
 		&:hover:not(:disabled) {
-			@extend :focus-visible;
+			@extend :focus;
 		}
 	}
 
@@ -642,11 +650,11 @@ dialog {
 		border-radius: 0.2em;
 
 		&:focus-within {
-			@extend :focus-visible;
+			@extend :focus;
 		}
 	}
 
-	input[type=radio]:focus-visible {
+	input[type=radio]:focus {
 		outline: none;
 	}
 }
