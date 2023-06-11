@@ -25,6 +25,7 @@ function addToUndoStack() {
 	context.undo.stack.push(serializeSpritesheet(context.spritesheet))
 	context.undo.index++
 	updateUndoRedoButtons()
+	context.bus.send(Events.stateUpdated)
 }
 
 function undo() {
@@ -43,6 +44,7 @@ function applyDataAtCurrentIndex() {
 	generateSpritesheetSVG(context.spritesheet)
 	updateUndoRedoButtons()
 	context.bus.send(Events.resetState)
+	context.bus.send(Events.stateUpdated)
 }
 
 function updateUndoRedoButtons() {

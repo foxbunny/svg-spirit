@@ -1,12 +1,14 @@
 import createUndo from './data/undo.js'
 import addIcons from './features/add-icons.feat.js'
 import aliasStyle from './features/alias-style.feat.js'
+import autosaveProject from './features/autosave-project.feat.js'
 import deleteColor from './features/delete-color.feat.js'
 import deleteIcons from './features/delete-icons.feat.js'
 import deleteStrokeWidth from './features/delete-stroke-width.feat.js'
 import downloadSpritesheet from './features/download-spritesheet.feat.js'
 import editColor from './features/edit-color.feat.js'
 import editStrokeWidth from './features/edit-stroke-width.feat.js'
+import goOffline from './features/go-offline.feat.js'
 import seeIconList from './features/see-icon-list.feat.js'
 import seeColorList from './features/see-color-list.feat.js'
 import createSpritesheet from './data/spritesheet.js'
@@ -24,17 +26,20 @@ let context = {
 	views,
 	spritesheet: createSpritesheet(),
 	undo: createUndo(),
-};
+}
+let serviceWorkerURL = new URL('service-worker.js', import.meta.url)
 
-[
+;[
 	addIcons,
 	aliasStyle,
+	autosaveProject,
 	deleteColor,
 	deleteIcons,
 	deleteStrokeWidth,
 	downloadSpritesheet,
 	editColor,
 	editStrokeWidth,
+	goOffline,
 	seeColorList,
 	seeIconList,
 	seeStrokeWidthList,

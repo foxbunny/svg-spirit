@@ -5,6 +5,7 @@ let EVENTS = {
 	spritesheetUpdated: 'spritesheetUpdated',
 	iconsAdded: 'iconsAdded',
 	iconsDeleted: 'iconsDeleted',
+	stateUpdated: 'stateUpdated',
 	resetState: 'resetState',
 	colorDeleted: 'colorDeleted',
 	colorEdited: 'colorEdited',
