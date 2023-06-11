@@ -11,9 +11,9 @@
 
 <script type="module" src="index.app.js"></script>
 
-<title>SVG Spirit</title>
+<title>SVG Spirit - icon spritesheet studio</title>
 </head>
-<body>
+<body data-mode="dark">
 <div id="content">
   <main class="panel">
     <header>
@@ -45,6 +45,13 @@
             <use href="img/icons.svg#rays"/>
           </svg>
           <span role="tooltip">Dark mode</span>
+        </button>
+        <button id="settings">
+          <svg class="icon" aria-hidden="true">
+            <use href="img/icons.svg#settings"/>
+            <use href="img/icons.svg#x"/>
+          </svg>
+          <span role="tooltip">Sprite settings</span>
         </button>
       </div>
     </header>
@@ -97,7 +104,7 @@
           </button>
         </div>
 
-        <ul id="spritesheet" data-layout="list">
+        <ul id="spritesheet" data-layout="tiles">
           <li></li>
         </ul>
       </div>
@@ -162,7 +169,7 @@
 </template>
 
 <template id="color">
-  <li class="color">
+  <li class="color style-value">
     <label>
       <span>Color value</span>
       <input type="color" name="value">
@@ -170,7 +177,7 @@
     <span></span>
     <label>
       <span>Alias</span>
-      <input type="text" name="alias" placeholder="no alias provided" pattern="[\w\-]+">
+      <input type="text" name="alias" placeholder="no CSS variable" pattern="[\w\-]+">
     </label>
     <button>
       <svg class="icon" aria-hidden="true">
@@ -182,10 +189,14 @@
 </template>
 
 <template id="stroke-width">
-  <li class="stroke-width">
+  <li class="stroke-width style-value">
     <label>
       <span>Stroke width</span>
       <input name="value" type="text">
+    </label>
+    <label>
+      <span>Alias</span>
+      <input type="text" name="alias" placeholder="no CSS variable" pattern="[\w\-]+">
     </label>
     <button>
       <svg class="icon" aria-hidden="true">
@@ -193,10 +204,6 @@
       </svg>
       <span role="tooltip">Delete stroke width</span>
     </button>
-    <label>
-      <span>Alias</span>
-      <input type="text" name="alias" placeholder="no alias provided" pattern="[\w\-]+">
-    </label>
   </li>
 </template>
 

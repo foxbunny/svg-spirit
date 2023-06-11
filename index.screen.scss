@@ -105,6 +105,15 @@
 	}
 }
 
+%text-field {
+	width: 100%;
+	height: var(--control-size);
+	padding: 0 0.5em;
+
+	border: 1px solid var(--control-border-color);
+	border-radius: 0.2em;
+}
+
 .icon {
 	--icon-primary: currentColor;
 	--icon-stroke: 1px;
@@ -119,19 +128,27 @@
 }
 
 body {
+	font-family: Quicksand, sans-serif;
 	height: 100vh;
 	overflow: hidden;
 }
 
-#content {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: stretch;
-	height: 100vh;
-	overflow-y: auto;
+@media (max-width: 70em) {
+	#content {
+		position: relative;
+	}
+}
 
-	scroll-snap-type: y mandatory;
-	scroll-behavior: smooth;
+@media (min-width: 70em) {
+	#content {
+		display: flex;
+		align-items: stretch;
+		height: 100vh;
+		overflow-y: auto;
+
+		scroll-snap-type: y mandatory;
+		scroll-behavior: smooth;
+	}
 }
 
 .panel {
@@ -147,22 +164,57 @@ body {
 
 main {
 	flex: 10000 0;
-	min-width: min(100%, 40em);
+
+	background: var(--secondary);
 }
 
 section.panel {
 	flex: 1;
-	gap: 1em;
+	gap: 3em;
 	padding: 1em;
-	min-width: min(100%, 30em);
 	flex-shrink: 0;
+	overflow-y: auto;
 
 	background: var(--secondary-alt)
 }
 
+@media (width < 70em) {
+	main {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: calc(100vw - 2em);
+		min-width: 20em;
+		z-index: 1;
+
+		transition: transform 0.4s;
+		box-shadow: 0.2em 0 0.5em rgba(0, 0, 0, 0.3);
+
+		[data-settings-open] & {
+			transform: translateX(max(4em - 100%, -28em));
+		}
+	}
+
+	section.panel {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: min(100% - 4em, 30em);
+	}
+}
+
+@media (width >= 70em) {
+	main {
+		min-width: min(100%, 40em);
+	}
+
+	section.panel {
+		min-width: min(100%, 30em);
+	}
+}
+
 header {
 	display: flex;
-	flex-wrap: wrap;
 	justify-content: space-between;
 	gap: 2em;
 	padding: 1em;
@@ -176,9 +228,15 @@ h1 {
 	height: 1.9em;
 	text-indent: -1000vw;
 	margin-top: 0.5em;
+	flex: none;
 
 	[data-mode=dark] & {
 		background-image: url('img/logo-dark.svg');
+	}
+
+	@media (width < 30em) {
+		background-image: url('img/favicon.svg');
+		width: 1.9em;
 	}
 }
 
@@ -198,6 +256,27 @@ h1 {
 	button, a, label {
 		@extend %has-tooltip;
 		@extend %tooltip-bottom;
+	}
+}
+
+button#settings {
+	use:last-child {
+		display: none;
+	}
+
+	@media (width >= 70em) {
+		display: none;
+	}
+}
+
+
+[data-settings-open] #settings {
+	use:first-child {
+		display: none;
+	}
+
+	use:last-child {
+		display: initial;
 	}
 }
 
@@ -223,7 +302,7 @@ h1 {
 
 #spritesheet-editor-main {
 	display: flex;
-	gap: 1em;
+	min-height: 0;
 }
 
 #spritesheet-tools {
@@ -268,7 +347,6 @@ h1 {
 	overflow-y: auto;
 	max-height: 100%;
 	display: flex;
-	gap: 1em;
 	flex: 1;
 	padding: 0 1em 1em;
 
@@ -276,10 +354,12 @@ h1 {
 
 	&[data-layout=tiles] {
 		flex-wrap: wrap;
+		gap: 1em;
 	}
 
 	&[data-layout=list] {
 		flex-direction: column;
+		gap: 0.5em;
 	}
 }
 
@@ -289,13 +369,17 @@ h1 {
 	padding: 2px;
 
 	scroll-snap-align: start;
-	transition: all var(--transition-duration);
+	transition-duration: var(--transition-duration);
+	transition-property: background-color, border-color;
 
 	label {
 		display: flex;
 		align-items: center;
 		gap: 1em;
-		transition: all var(--transition-duration);
+
+		transition-duration: var(--transition-duration);
+		transition-property: background-color, border-color;
+		background-color: var(--secondary-alt);
 	}
 
 	[data-layout=tiles] & label {
@@ -307,11 +391,13 @@ h1 {
 		border: var(--sprite-border-width) solid var(--control-border-color);
 		border-radius: 0.2em;
 		text-align: center;
-		background-color: var(--secondary-alt);
 	}
 
 	[data-layout=list] & label {
-		display: flex;
+		padding: 0.5em;
+
+		border: 1px solid var(--control-border-color);
+		border-radius: 0.2em;
 	}
 
 	input[type=checkbox] {
@@ -349,16 +435,20 @@ h1 {
 	}
 
 	svg {
-		--bg-dark: #ddd;
 		background-color: white;
-		background-image: linear-gradient(45deg, var(--bg-dark) 25%, transparent 25%), linear-gradient(-45deg, var(--bg-dark) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, var(--bg-dark) 75%), linear-gradient(-45deg, transparent 75%, var(--bg-dark) 75%);
-		background-size: 1em 1em;
-		background-position: 0 0, 0 10px, 0.5em -0.5em, -0.5em 0px;
 	}
 
 	[data-layout=tiles] & svg {
+		--bg-dark: #ddd;
 		width: 4em;
 		height: 4em;
+
+		background-image: linear-gradient(45deg, var(--bg-dark) 25%, transparent 25%),
+		linear-gradient(-45deg, var(--bg-dark) 25%, transparent 25%),
+		linear-gradient(45deg, transparent 75%, var(--bg-dark) 75%),
+		linear-gradient(-45deg, transparent 75%, var(--bg-dark) 75%);
+		background-size: 1em 1em;
+		background-position: 0 0, 0 10px, 0.5em -0.5em, -0.5em 0px;
 	}
 
 	[data-layout=list] & svg {
@@ -367,8 +457,87 @@ h1 {
 	}
 }
 
-.color {
+.settings-panel:not([hidden]) {
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+
+	h3 {
+		padding: 0.5em 0;
+
+		border-bottom: 1px solid var(--primary);
+		text-transform: uppercase;
+		font-size: var(--min-font-size);
+	}
+
+	button {
+		border: none;
+		background: transparent;
+		color: inherit;
+
+		&:disabled {
+			color: var(--disabled-fg);
+		}
+	}
+
+	button > span {
+		@extend %visually-hidden;
+	}
+}
+
+.style-value {
+	--control-size: 1.8em;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 0.5em;
+	padding: 0.5em 0;
+
+	button {
+		flex: none;
+	}
+
+	label:not(:first-child) {
+		flex: 1;
+	}
+
+	label:not(:first-child) > input {
+		@extend %text-field;
+	}
+
 	label > span {
 		@extend %visually-hidden;
+	}
+}
+
+.color {
+	input[type=color] {
+		width: var(--control-size);
+		height: var(--control-size);
+
+		border: 1px solid var(--control-border-color);
+		border-radius: 0.2em;
+		background-color: var(--secondary);
+	}
+
+	span:nth-child(2) {
+		height: var(--control-size);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0 0.5em;
+		width: 5em;
+
+		border: 1px solid var(--control-border-color);
+		border-radius: 0.2em;
+		background-color: var(--secondary);
+	}
+}
+
+.stroke-width {
+	label:first-child > input {
+		@extend %text-field;
+		width: 7.3em; // NB: width of color input + gap + color value
+		text-align: right;
 	}
 }
