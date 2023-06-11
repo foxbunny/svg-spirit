@@ -8,7 +8,7 @@ export default function extractSymbolFromSvg(svgSource) {
 	try {
 		if (isAffinitySvg($svgDocument)) return extractAffinitySVG($svgDocument)
 		if (isSingleGroupSVG($svgDocument)) return extractSingleGroupSVG($svgDocument)
-		else return extractGenericSVG($svgDocument, options)
+		else return extractGenericSVG($svgDocument)
 	} catch (e) {
 		console.error(`Error ${e} in ${svgSource}`, e)
 		throw new ParseError()
@@ -59,6 +59,7 @@ function commonFixes($svg, $symbol) {
 	fixViewport($svg, $symbol)
 	if ($svg.hasAttribute('style')) $symbol.setAttribute('style', $svg.getAttribute('style'))
 	convertStyleToAttributes($symbol)
+	if (!$symbol.hasAttribute('fill')) $symbol.setAttribute('fill', 'none') // make sure there is no fill by default
 	$symbol.querySelectorAll('[style]').forEach(convertStyleToAttributes)
 	stripTextNodes($symbol)
 	stripNamespace($symbol)
@@ -73,7 +74,6 @@ function fixViewport($svg, $symbol) {
 			$symbol.setAttribute('viewBox', viewBox)
 		}
 		else $symbol.setAttribute('viewBox', $svg.getAttribute('viewBox'))
-
 		$svg.removeAttribute('width')
 		$svg.removeAttribute('height')
 	}
