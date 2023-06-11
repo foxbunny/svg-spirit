@@ -16,8 +16,5 @@
     "@parcel/transformer-webmanifest": "^2.9.1",
     "parcel": "^2.9.1",
     "parcel-plugin-nuke-dist": "^1.0.1"
-  },
-  "import": {
-    "#howto/*": "./howto/*.js"
   }
 }
