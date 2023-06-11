@@ -1,6 +1,5 @@
 @use "style/reset";
 @use "style/variables";
-@use "style/colors";
 
 %visually-hidden {
 	position: absolute;
@@ -107,6 +106,14 @@
 
 %text-field {
 	width: 100%;
+	height: var(--control-size);
+	padding: 0 0.5em;
+
+	border: 1px solid var(--control-border-color);
+	border-radius: 0.2em;
+}
+
+%plain-button {
 	height: var(--control-size);
 	padding: 0 0.5em;
 
@@ -256,6 +263,10 @@ h1 {
 	button, a, label {
 		@extend %has-tooltip;
 		@extend %tooltip-bottom;
+
+		&:hover:not(:disabled, a:not([href])) {
+			@extend :focus-visible;
+		}
 	}
 }
 
@@ -314,6 +325,10 @@ button#settings {
 
 	button, a, label {
 		@extend %tooltip-right;
+
+		&:hover:not(:disabled) {
+			@extend :focus-visible;
+		}
 	}
 }
 
@@ -340,6 +355,10 @@ button#settings {
 
 	button, a, label {
 		@extend %has-tooltip;
+
+		&:hover:not(:disabled, a:not([hover])) {
+			@extend :focus-visible;
+		}
 	}
 }
 
@@ -468,6 +487,7 @@ button#settings {
 		border-bottom: 1px solid var(--primary);
 		text-transform: uppercase;
 		font-size: var(--min-font-size);
+		letter-spacing: 0.1em;
 	}
 
 	button {
@@ -486,7 +506,6 @@ button#settings {
 }
 
 .style-value {
-	--control-size: 1.8em;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -494,7 +513,13 @@ button#settings {
 	padding: 0.5em 0;
 
 	button {
+		display: inline-flex;
 		flex: none;
+		border-radius: 0.2em;
+
+		&:hover {
+			@extend :focus-visible;
+		}
 	}
 
 	label:not(:first-child) {
@@ -514,10 +539,16 @@ button#settings {
 	input[type=color] {
 		width: var(--control-size);
 		height: var(--control-size);
+		padding: 0.2em;
+		cursor: pointer;
 
 		border: 1px solid var(--control-border-color);
 		border-radius: 0.2em;
 		background-color: var(--secondary);
+
+		&:hover {
+			@extend :focus-visible;
+		}
 	}
 
 	span:nth-child(2) {
@@ -539,5 +570,101 @@ button#settings {
 		@extend %text-field;
 		width: 7.3em; // NB: width of color input + gap + color value
 		text-align: right;
+	}
+}
+
+dialog {
+	background: var(--secondary);
+	border: 1px solid var(--control-border-color);
+	border-radius: 0.2em;
+	box-shadow: 0 0.2em 0.5em rgba(0, 0, 0, 0.3);
+
+	h2 {
+		padding: 0.4em 1em;
+		text-transform: uppercase;
+		text-align: center;
+		background: var(--primary);
+		color: var(--secondary);
+	}
+
+	& > :not(:first-child) {
+		padding: 1em;
+	}
+
+	.actions {
+		display: flex;
+		justify-content: flex-end;
+		gap: 0.5em;
+		padding-top: 1em;
+		margin-top: 1em;
+		border-top: 1px solid var(--control-border-color);
+	}
+
+	.actions button {
+		@extend %plain-button;
+
+		&:hover:not(:disabled) {
+			@extend :focus-visible;
+		}
+	}
+
+	.actions button:last-child {
+		background: var(--negative);
+		color: var(--secondary);
+	}
+
+	li {
+		--color: none;
+		margin-bottom: 0.5em;
+
+		background: var(--secondary-alt);
+		transition-duration: 0.4s;
+		transition-property: background-color, border-color;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		:has(:checked) {
+			background: var(--selected-bg);
+			border-color: var(--selected-border);
+		}
+	}
+
+	label {
+		display: flex;
+		align-items: center;
+		padding: 0.5em;
+		gap: 1em;
+
+		border: 1px solid var(--control-border-color);
+		border-radius: 0.2em;
+
+		&:focus-within {
+			@extend :focus-visible;
+		}
+	}
+
+	input[type=radio]:focus-visible {
+		outline: none;
+	}
+}
+
+.replacement-color {
+	--color: transparent;
+
+	label > span {
+		display: inline-flex;
+		gap: 0.5em;
+		align-items: center;
+
+		&::before {
+			content: '';
+			display: block;
+			width: 1em;
+			height: 1em;
+			background: var(--color);
+			border: 1px solid var(--control-border-color);
+		}
 	}
 }
