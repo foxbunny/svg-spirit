@@ -8,7 +8,9 @@ export default function getAllColors(spritesheet) {
 				$symbol
 					.querySelectorAll(`[${name}]`)
 					.forEach($el => {
-						colors.add($el.getAttribute(name))
+						let colorValue = $el.getAttribute(name)
+						if (colorValue.startsWith('url(')) return
+						colors.add(colorValue)
 					})
 			})
 	})
