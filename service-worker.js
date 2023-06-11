@@ -3,6 +3,7 @@ import { manifest, version } from '@parcel/service-worker'
 let CACHE_ID = 'svg-spirit-' + version
 
 function invalidateStaleCaches() {
+	console.log('Activating new version', CACHE_ID)
 	return caches.keys()
 		.then(keys => Promise.all(
 			keys.map(key => key != CACHE_ID && caches.delete(key))),
@@ -10,6 +11,7 @@ function invalidateStaleCaches() {
 }
 
 function populateAssetCache() {
+	console.log('Installing new version', CACHE_ID)
 	return caches.open(CACHE_ID)
 		.then(cache => cache.addAll([
 			new Request('/', {cache: 'reload'}),
