@@ -6,6 +6,6 @@ export default function addIconToSpritesheet(spritesheet, icon) {
 
 function fileNameToId(name) {
 	return name.split('.')[0]
-		.replace(/^[^a-z]/, '-')
+		.replace(/^[^a-z]/i, '')
 		.replace(/[^\w-]/g, '-')
 }
