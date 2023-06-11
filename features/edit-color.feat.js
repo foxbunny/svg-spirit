@@ -5,6 +5,8 @@ import Events from '../data/events.js'
 
 let context
 
+// TODO: Support stroke and fill opacity
+
 export default function editColor(appContext) {
   context = appContext
   $colors.addEventListener('change', ev => {

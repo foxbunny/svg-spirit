@@ -2,6 +2,8 @@ class ParseError extends Error {}
 
 let RGB_RE = /rgb\((\d{1,3}), (\d{1,3}), (\d{1,3})\)/
 
+// TODO: Support gradients
+
 export default function extractSymbolFromSvg(svgSource) {
 	let $svgDocument = new DOMParser().parseFromString(svgSource, 'image/svg+xml')
 	if (isNotExtracted($svgDocument)) throw new ParseError()
