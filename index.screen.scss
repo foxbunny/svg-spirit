@@ -498,20 +498,6 @@ button#settings {
 		font-size: var(--min-font-size);
 		letter-spacing: 0.1em;
 	}
-
-	button {
-		border: none;
-		background: transparent;
-		color: inherit;
-
-		&:disabled {
-			color: var(--disabled-fg);
-		}
-	}
-
-	button > span {
-		@extend %visually-hidden;
-	}
 }
 
 .style-value {
@@ -522,9 +508,15 @@ button#settings {
 	padding: 0.5em 0;
 
 	button {
+		@extend %has-tooltip;
+		@extend %tooltip-left;
 		display: inline-flex;
 		flex: none;
+
+		border: none;
 		border-radius: 0.2em;
+		background: transparent;
+		color: inherit;
 
 		&:hover {
 			@extend :focus;
@@ -560,7 +552,7 @@ button#settings {
 		}
 	}
 
-	span:nth-child(2) {
+	> span:nth-child(2) {
 		height: var(--control-size);
 		display: flex;
 		align-items: center;
