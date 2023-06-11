@@ -8,8 +8,8 @@
     "dev": "parcel index.html",
     "dist": "parcel build index.html"
   },
-  "author": "",
-  "license": "UNLICENSED",
+  "author": "Hajime Yamasaki Vukelic",
+  "license": "MIT",
   "devDependencies": {
     "@parcel/packager-raw-url": "^2.9.1",
     "@parcel/service-worker": "^2.9.2",
