@@ -9,6 +9,8 @@ import downloadSpritesheet from './features/download-spritesheet.feat.js'
 import editColor from './features/edit-color.feat.js'
 import editStrokeWidth from './features/edit-stroke-width.feat.js'
 import goOffline from './features/go-offline.feat.js'
+import renameIcons from './features/rename-icons.feat.js'
+import seeEditList from './features/see-edit-list.feat.js'
 import seeIconList from './features/see-icon-list.feat.js'
 import seeColorList from './features/see-color-list.feat.js'
 import createSpritesheet from './data/spritesheet.js'
@@ -40,8 +42,10 @@ let serviceWorkerURL = new URL('service-worker.js', import.meta.url)
 	editColor,
 	editStrokeWidth,
 	goOffline,
+	renameIcons,
 	seeColorList,
 	seeIconList,
+	seeEditList,
 	seeStrokeWidthList,
 	selectIcons,
 	toggleBetweenListAndTileView,

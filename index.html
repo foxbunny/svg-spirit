@@ -125,6 +125,17 @@
       <h3 id="sprite-stroke-width-heading">Stroke width</h3>
       <ul id="stroke-widths"></ul>
     </section>
+
+    <section class="settings-panel" aria-labelledby="rename-icons-heading">
+      <h3 id="rename-icons-heading">Icon name editor</h3>
+      <ul id="name-edits"></ul>
+      <button id="add-edit">
+        <svg class="icon" aria-hidden="true">
+          <use href="img/icons.svg#add"/>
+        </svg>
+        <span>Add edit</span>
+      </button>
+    </section>
   </section>
 </div>
 
@@ -224,6 +235,30 @@
       <input type="radio" name="replacement">
       <span></span>
     </label>
+  </li>
+</template>
+
+<template id="name-edit">
+  <li class="name-edit">
+    <label>
+      <span>Edit type</span>
+      <select name="edit-type">
+        <option value="rp">remove prefix</option>
+        <option value="ap">add prefix</option>
+        <option value="rs">remove suffix</option>
+        <option value="as">add suffix</option>
+      </select>
+    </label>
+    <label>
+      <span>Text</span>
+      <input type="text" name="edit-text" placeholder="text">
+    </label>
+    <button value="delete edit">
+      <svg class="icon" aria-hidden="true">
+        <use href="img/icons.svg#x"/>
+      </svg>
+      <span role="tooltip">Delete stroke width</span>
+    </button>
   </li>
 </template>
 

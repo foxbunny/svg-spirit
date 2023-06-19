@@ -13,6 +13,9 @@ let EVENTS = {
 	strokeWidthEdited: 'strokeWidthEdited',
 	selectionChanged: 'selectionChanged',
 	aliasChanged: 'aliasChanged',
+	deletedNameEdit: 'deletedNameEdit',
+	updatedNameEdit: 'updatedNameEdit',
+	addedEdit: 'addedEdit',
 }
 let MIN_EDIT_DISTANCE_FOR_SIMILARITY = 7 // derived by manually testing
 

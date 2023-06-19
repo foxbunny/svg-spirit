@@ -4,5 +4,6 @@ export default function createSpritesheet() {
 		aliases: { /* value (color, width): name */ },
 		svg: null,
 		url: '',
+		nameEdits: [/* {type: (string), text: (string)},... */],
 	}
 }

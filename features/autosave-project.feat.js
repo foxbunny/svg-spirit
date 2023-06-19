@@ -1,7 +1,6 @@
 import Events from '../data/events.js'
 import deserializeSpritesheet from '../howto/deserialize-spritesheet.howto.js'
 import generateSpritesheetSVG from '../howto/generate-spritesheet-svg.howto.js'
-import serializeSpritesheet from '../howto/serialize-spritesheet.howto.js'
 
 let context
 let STORAGE_KEY = 'currentProject'
@@ -13,7 +12,8 @@ export default function autosaveProject(appContext) {
 }
 
 function autosave() {
-	localStorage[STORAGE_KEY] = JSON.stringify(serializeSpritesheet(context.spritesheet))
+	let lastState = context.undo.stack[context.undo.stack.length - 1]
+	localStorage[STORAGE_KEY] = JSON.stringify(lastState)
 }
 
 function autoload() {

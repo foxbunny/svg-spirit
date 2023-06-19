@@ -4,5 +4,6 @@ export default function serializeSpritesheet(spritesheet) {
 		icons: Object.values(spritesheet.icons)
 			.map($symbol => serializer.serializeToString($symbol)),
 		aliases: spritesheet.aliases,
+		nameEdits: spritesheet.nameEdits,
 	}
 }

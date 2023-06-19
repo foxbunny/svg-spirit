@@ -1,5 +1,6 @@
 import Events from '../data/events.js'
 import generateSpritesheetSVG from '../howto/generate-spritesheet-svg.howto.js'
+import makeUndoable from '../howto/make-undoable.howto.js'
 import { setStyleAlias } from '../howto/set-style-alias.howto.js'
 import validateField from '../howto/validate-field.howto.js'
 
@@ -17,6 +18,7 @@ export default function aliasStyle(appContext) {
 				updateAlias(ev.target.dataset.value, ev.target.value)
 		}, DEBOUNCE_DELAY)
 	})
+	makeUndoable(context, Events.aliasChanged)
 }
 
 let debounce = Symbol('debounce')

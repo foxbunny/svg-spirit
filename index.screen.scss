@@ -111,6 +111,12 @@
 
 	border: 1px solid var(--control-border-color);
 	border-radius: 0.2em;
+	background: var(--input-bg);
+	color: var(--primary);
+
+	&::placeholder {
+		color: var(--placeholder-fg);
+	}
 }
 
 %plain-button {
@@ -500,7 +506,8 @@ button#settings {
 	}
 }
 
-.style-value {
+.style-value,
+.name-edit {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -658,6 +665,7 @@ dialog {
 		display: inline-flex;
 		gap: 0.5em;
 		align-items: center;
+		color: var(--primary);
 
 		&::before {
 			content: '';
@@ -668,4 +676,28 @@ dialog {
 			border: 1px solid var(--control-border-color);
 		}
 	}
+}
+
+.replacement-stroke-width {
+	label > span {
+		color: var(--primary);
+	}
+}
+
+.name-edit {
+	select {
+		@extend %text-field;
+	}
+}
+
+#add-edit {
+	height: var(--control-size);
+	padding: 0 1em;
+	display: inline-flex;
+	align-self: flex-start;
+	align-items: center;
+	gap: 0.5em;
+	border: 1px solid var(--control-border-color);
+	background: transparent;
+	color: var(--primary);
 }

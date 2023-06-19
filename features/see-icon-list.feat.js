@@ -1,4 +1,5 @@
 import Events from '../data/events.js'
+import applyNameEdits from '../howto/apply-name-edits.howto.js'
 
 let context
 
@@ -12,19 +13,21 @@ let $spritesheet = document.getElementById('spritesheet')
 
 function updateSpritesheet() {
   let iconNames = Object.keys(context.spritesheet.icons)
+  let editName = applyNameEdits(context.spritesheet.nameEdits)
   let $$icons = document.createDocumentFragment()
   iconNames.forEach(name => {
+    let editedName = editName(name)
     let id = 'sprite-' + name
     let inputId = 'select-' + name
     let $icon = context.views.getOrCreateById('sprite', id)
     setCustomVariables($icon.querySelector('svg'), context.spritesheet.aliases)
-    $icon.querySelector('use').setAttribute('href', `${context.spritesheet.url}#${name}`)
+    $icon.querySelector('use').setAttribute('href', `${context.spritesheet.url}#${editedName}`)
     Object.assign($icon.querySelector('input'), {
       value: name,
       id: inputId,
     })
     $icon.querySelector('label').htmlFor = inputId
-    $icon.querySelector('span').textContent = name
+    $icon.querySelector('span').textContent = editedName
     $$icons.append($icon)
   })
   $spritesheet.replaceChildren($$icons)

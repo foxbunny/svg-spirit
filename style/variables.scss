@@ -3,6 +3,8 @@ body {
 	--primary: #333;
 	--secondary: #efefef;
 	--secondary-alt: #d8d8d8;
+	--input-bg: #fff;
+	--placeholder-fg: #777;
 	--disabled-fg: #999;
 	--active: #035339;
 	--active-border: #068856;
@@ -38,4 +40,6 @@ body[data-mode=dark] {
 	--selected-border: #dcd106;
 	--selected-bg: #3b3b28;
 	--negative: #f48888;
+	--input-bg: #686868;
+	--placeholder-fg: #aaa;
 }

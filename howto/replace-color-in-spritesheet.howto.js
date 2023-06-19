@@ -1,7 +1,7 @@
 import { COLOR_ATTRIBUTES } from '../data/constants.js'
 
 export default function replaceColorInSpritesheet(spritesheet, deletedColor, replacement) {
-	if (spritesheet.aliases.hasOwnProperty(deletedColor)) {
+	if (deletedColor in spritesheet.aliases) {
 		let name = spritesheet.aliases[deletedColor]
 		delete spritesheet.aliases[deletedColor]
 		if (replacement != 'none') spritesheet.aliases[replacement] = name

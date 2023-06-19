@@ -1,4 +1,5 @@
 import generateSpritesheetSVG from '../howto/generate-spritesheet-svg.howto.js'
+import makeUndoable from '../howto/make-undoable.howto.js'
 import replaceStrokeWidthInSpritesheet from '../howto/replace-stroke-width-in-spritesheet.howto.js'
 import validateField from '../howto/validate-field.howto.js'
 import Events from '../data/events.js'
@@ -22,6 +23,7 @@ export default function editStrokeWidth(appContext) {
 			}
 		}, DEBOUNCE_DELAY)
 	})
+	makeUndoable(context, Events.strokeWidthEdited)
 }
 
 let debounce = Symbol('debounce')

@@ -1,4 +1,5 @@
 import { COLOR_ATTRIBUTES, STROKE_WIDTH_ATTRIBUTES } from '../data/constants.js'
+import applyNameEdits from './apply-name-edits.howto.js'
 
 let XML_PRELUDE = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>'
 
@@ -9,7 +10,9 @@ export default function generateSpritesheetSVG(spritesheet) {
 	}
 	spritesheet.svg = null
 	let $$icons = Object.values(spritesheet.icons)
+
 	if (!$$icons.length) return
+
 	let $svg = new DOMParser()
 		.parseFromString(
 			`<svg xmlns="http://www.w3.org/2000/svg" fill="none"><defs></defs></svg>`,
@@ -17,7 +20,12 @@ export default function generateSpritesheetSVG(spritesheet) {
 		)
 		.querySelector('svg')
 	let $defs = $svg.querySelector('defs')
-	$$icons.forEach($symbol => $defs.append($symbol.cloneNode(true)))
+	let editName = applyNameEdits(spritesheet.nameEdits)
+	$$icons.forEach($symbol => {
+		$symbol = $symbol.cloneNode(true)
+		$symbol.id = editName($symbol.id)
+		$defs.append($symbol)
+	})
 	applyAliases($svg, spritesheet.aliases)
 	spritesheet.svg = $svg
 	spritesheet.url = URL.createObjectURL(new Blob([XML_PRELUDE, $svg.outerHTML], {type: 'image/svg+xml'}))
